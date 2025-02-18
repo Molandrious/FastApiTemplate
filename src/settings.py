@@ -3,7 +3,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Annotated
 
-from pydantic import AfterValidator, BaseModel, DirectoryPath, Field, PostgresDsn
+from pydantic import AfterValidator, BaseModel, DirectoryPath, Field, PostgresDsn, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 UpperStr = Annotated[str, AfterValidator(lambda v: v.upper())]
@@ -63,8 +63,8 @@ class EnvSettings(_BaseSettings):
     rest: RESTSettings = RESTSettings(_env_prefix='REST_')
     logger: LoggerSettings = LoggerSettings(_env_prefix='LOGGER_')
     tests: TestsSettings = TestsSettings(_env_prefix='TEST')
-    # postgres_dsn: PostgresDsn = Field()
-    # redis_dsn: RedisDsn = Field()
+    postgres_dsn: PostgresDsn = Field()
+    redis_dsn: RedisDsn = Field()
     sentry_dsn: str = Field(default='')
     debug: bool = Field(default=False)
 
