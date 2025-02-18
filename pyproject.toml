@@ -1,0 +1,133 @@
+[project]
+name = "fast-api-template"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "epyxid>=0.3.3",
+    "fastapi[all]>=0.115.8",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "pydantic-settings>=2.7.1",
+    "tzdata>=2025.1",
+    "uvicorn>=0.34.0",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "pytest-clarity>=1.0.1",
+    "pytest-cov>=6.0.0",
+    "pytest-freezegun>=0.4.2",
+    "pytest-sugar>=1.0.0",
+    "ruff>=0.9.6",
+]
+
+[tool.ruff]
+target-version = 'py312'
+line-length = 120
+src = ["src", "tests"]
+exclude = ["migrations", "pyproject.toml", "locust_profile.py", "tests"]
+
+lint.ignore = [
+    "ERA001",
+    "S101",
+    "SLF00",
+    "ISC001",
+    "RET504",
+    "S105",
+    "S106",
+    "RUF001",
+    "RUF003",
+    "PLR0913",
+    "TRY003",
+    "S311",
+    'COM819',
+    'B024',
+    'B008',
+    'COM812',
+    'I001',
+    'RUF100',
+    'UP037',
+    'TCH002',
+    'TCH003',
+    'RUF012',
+]
+
+lint.select = [
+    "F", # Pyflakes
+    "E", # pycodestyle
+    "C90", # mccabe
+    "I", # isort
+    "N", # pep8-naming
+    #    "D", # pydocstyle
+    "UP", # pyupgrade
+    "YTT", # flake8-2020
+    #    "ANN", # flake8-annotations
+    "S", # flake8-bandit
+    # "BLE",  # flake8-blind-except
+    "FBT", # flake8-boolean-trap
+    "B", # flake8-bugbear
+    #   "A",  # flake8-builtins
+    "COM", # flake8-commas
+    "C4", # flake8-comprehensions
+    # "DTZ",  # flake8-datetimez
+    "T10", # flake8-debugger
+    "EXE", # flake8-executable
+    "ISC", # flake8-implicit-str-concat
+    "ICN", # flake8-import-conventions
+    "G", # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "T20", # flake8-print
+    "PT", # flake8-pytest-style
+    #    "Q", # flake8-quotes
+    "RET", # flake8-return
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "TCH", # flake8-type-checking
+    "ARG", # flake8-unused-arguments
+    "PTH", # flake8-use-pathlib
+    "ERA", # eradicate
+    "PL", # Pylint
+    "TRY", # tryceratops
+    "RSE", # flake8-raise
+    "SLF", # flake8-self
+    "RUF", # Ruff-specific rules
+    "ASYNC", # flake8-async
+]
+
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "fastapi.params.Depends",
+    "fastapi.Query",
+    "fastapi.params.Query",
+]
+
+
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel", "sqlalchemy.orm.DeclarativeBase"]
+runtime-evaluated-decorators = ["pydantic.validate_call", "attrs.define", "sqlalchemy.orm.declared_attr"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 20
+
+[tool.ruff.lint.isort]
+detect-same-package = true
+force-wrap-aliases = true
+combine-as-imports = true
+
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
